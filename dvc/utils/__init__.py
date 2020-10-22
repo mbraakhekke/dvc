@@ -9,6 +9,7 @@ import re
 import stat
 import sys
 import time
+import binascii
 
 import colorama
 import nanotime
@@ -57,6 +58,11 @@ def file_md5(fname, tree=None):
         open_func = open
 
     if exists_func(fname):
+        chksumfile = type(fname)(fname.parent / (fname.name + '.md5'))
+        if exists_func(chksumfile):
+            with open_func(chksumfile,'rt') as fobj:
+                md5_str = fobj.read()
+            return (md5_str, binascii.unhexlify(md5_str))
         hash_md5 = hashlib.md5()
         binary = not istextfile(fname, tree=tree)
         size = stat_func(fname).st_size
