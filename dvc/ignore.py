@@ -186,7 +186,7 @@ class DvcIgnoreFilter:
     def __init__(self, tree, root_dir):
         from dvc.repo import Repo
 
-        default_ignore_patterns = [".hg/", ".git/", "{}/".format(Repo.DVC_DIR)]
+        default_ignore_patterns = [".hg/", ".git/", "{}/".format(Repo.DVC_DIR),"*.md5"]
 
         self.tree = tree
         self.root_dir = root_dir
